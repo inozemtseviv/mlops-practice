@@ -1,0 +1,21 @@
+version: '3.8'
+
+networks:
+  app:
+    driver: bridge
+
+services:
+  back:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: back
+    restart: on-failure
+    environment:
+      - PATH_TO_MODEL=/app/data
+    volumes:
+      - .:/app
+    networks:
+      - app
+    ports:
+      - '80:80'
